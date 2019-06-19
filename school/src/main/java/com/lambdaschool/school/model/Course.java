@@ -1,27 +1,33 @@
 package com.lambdaschool.school.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@ApiModel(value = "Course", description = "The Course Entity")
 @Entity
 @Table(name = "course")
 public class Course
 {
+    @ApiModelProperty(name = "courseid", value = "Primary key for a Course", required = true, example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @JsonView(View.CoursesOnly.class)
+    //    @JsonView(View.CoursesOnly.class)
     private long courseid;
 
-//    @JsonView(View.CoursesOnly.class)
+    @ApiModelProperty(name = "coursename", value = "Course Name", required = true, example = "JavaScript")
+    //    @JsonView(View.CoursesOnly.class)
     private String coursename;
 
     @ManyToOne
     @JoinColumn(name = "instructid")
     @JsonIgnoreProperties("courses")
-//    @JsonView(View.CoursesOnly.class)
+    //    @JsonView(View.CoursesOnly.class)
     private Instructor instructor;
 
     @ManyToMany(mappedBy = "courses")
@@ -83,3 +89,4 @@ public class Course
         this.students = students;
     }
 }
+
